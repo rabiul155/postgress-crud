@@ -13,6 +13,8 @@ app.use(express.json());
 
 app.use("/users", userRoutes);
 
+console.log(userRoutes)
+
 app.get('/', (req, res) => {
   res.send('PostgreSQL CRUD API is running...');
 });
