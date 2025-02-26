@@ -3,6 +3,7 @@ const cors = require('cors');
 require('dotenv').config();
 
 const userRoutes = require('./routes/user');
+const todoRoutes = require('./routes/todo');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -12,8 +13,7 @@ app.use(cors());
 app.use(express.json());
 
 app.use("/users", userRoutes);
-
-console.log(userRoutes)
+app.use("/users", todoRoutes);
 
 app.get('/', (req, res) => {
   res.send('PostgreSQL CRUD API is running...');
