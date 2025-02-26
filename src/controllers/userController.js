@@ -1,7 +1,7 @@
 const pool = require('../config/db');
 
 // Get all users
-const getUsers = async (req, res) => {
+exports.getUsers = async (req, res) => {
   try {
     const result = await pool.query('SELECT * FROM users');
     res.json(result.rows);
@@ -11,7 +11,7 @@ const getUsers = async (req, res) => {
 };
 
 // Get user by ID
-const getUserById = async (req, res) => {
+exports.getUserById = async (req, res) => {
   try {
     const { id } = req.params;
     const result = await pool.query('SELECT * FROM users WHERE id = $1', [id]);
@@ -23,7 +23,7 @@ const getUserById = async (req, res) => {
 };
 
 // Create a new user
-const createUser = async (req, res) => {
+exports.createUser = async (req, res) => {
   try {
     const { name, email } = req.body;
     const result = await pool.query('INSERT INTO users (name, email) VALUES ($1, $2) RETURNING *', [name, email]);
@@ -34,7 +34,7 @@ const createUser = async (req, res) => {
 };
 
 // Update user
-const updateUser = async (req, res) => {
+exports.updateUser = async (req, res) => {
   try {
     const { id } = req.params;
     const { name, email } = req.body;
@@ -47,7 +47,7 @@ const updateUser = async (req, res) => {
 };
 
 // Delete user
-const deleteUser = async (req, res) => {
+exports.deleteUser = async (req, res) => {
   try {
     const { id } = req.params;
     const result = await pool.query('DELETE FROM users WHERE id = $1 RETURNING *', [id]);
@@ -58,4 +58,3 @@ const deleteUser = async (req, res) => {
   }
 };
 
-module.exports = { getUsers, getUserById, createUser, updateUser, deleteUser };
